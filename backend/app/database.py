@@ -1,25 +1,20 @@
 import os
-
-from dotenv import load_dotenv
 from pymongo import MongoClient
 
-load_dotenv()
-
-MONGO_URI = os.getenv("MONGO_URI")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "skillsync_db")
-
-client = MongoClient(
-    MONGO_URI,
-    serverSelectionTimeoutMS=5000
+MONGO_URI = os.getenv(
+    "MONGO_URI",
+    "mongodb://localhost:27017/"
 )
 
-database = client[DATABASE_NAME]
+DATABASE_NAME = os.getenv(
+    "DATABASE_NAME",
+    "skillsync_db"
+)
 
-users_collection = database["users"]
-skills_collection = database["skills"]
-certifications_collection = database["certifications"]
+client = MongoClient(MONGO_URI)
 
+db = client[DATABASE_NAME]
 
-def test_connection():
-    client.admin.command("ping")
-    return True
+users_collection = db["users"]
+skills_collection = db["skills"]
+certifications_collection = db["certifications"]
