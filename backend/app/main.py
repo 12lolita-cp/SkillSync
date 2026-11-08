@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from app.routes.skill_routes import router as skill_router
 from app.database import test_connection
 from app.routes.student_routes import router as student_router
 
@@ -34,3 +34,4 @@ def health():
 
 
 app.include_router(student_router)
+app.include_router(skill_router)
