@@ -1,37 +1,28 @@
 from fastapi import FastAPI
-from app.routes.skill_routes import router as skill_router
-from app.database import test_connection
+
 from app.routes.student_routes import router as student_router
+from app.routes.skill_routes import router as skill_router
+from app.routes.certification_routes import router as certification_router
+
 
 app = FastAPI(
     title="SkillSync API",
-    description="Student Skills and Internship Platform",
+    description="Student Skills, Projects and Internship Platform",
     version="1.0.0"
 )
 
 
 @app.get("/")
-def home():
-    return {
-        "message": "Welcome to SkillSync API"
-    }
+def root():
+    return {"message": "SkillSync API is running"}
 
 
 @app.get("/health")
-def health():
-    try:
-        test_connection()
-
-        return {
-            "status": "healthy",
-            "database": "MongoDB connected"
-        }
-
-    except Exception:
-        return {
-            "status": "unhealthy"
-        }
+def health_check():
+    return {"status": "healthy"}
 
 
+# Register API routers
 app.include_router(student_router)
 app.include_router(skill_router)
+app.include_router(certification_router)
