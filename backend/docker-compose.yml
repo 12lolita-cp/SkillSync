@@ -1,0 +1,23 @@
+services:
+
+  backend:
+    build: .
+    container_name: skillsync-backend
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/
+      DATABASE_NAME: skillsync_db
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:7
+    container_name: skillsync-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
