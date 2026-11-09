@@ -1,3 +1,4 @@
+
 import os
 from pymongo import MongoClient
 
@@ -18,3 +19,6 @@ db = client[DATABASE_NAME]
 users_collection = db["users"]
 skills_collection = db["skills"]
 certifications_collection = db["certifications"]
+internships_collection = db["internships"]
+admins_collection = db["admins"]
+applications_collection = db["applications"]
