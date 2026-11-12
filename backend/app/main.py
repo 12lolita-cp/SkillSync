@@ -1,5 +1,6 @@
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.auth_routes import router as auth_router
 from app.routes.student_routes import router as student_router
@@ -13,6 +14,15 @@ app = FastAPI(
     title="SkillSync API",
     description="Student Skills, Projects and Internship Platform",
     version="1.0.0"
+)
+
+# Allow the React frontend to communicate with FastAPI
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
